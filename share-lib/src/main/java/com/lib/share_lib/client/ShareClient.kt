@@ -1,12 +1,13 @@
-package com.lib.share.client
+package com.lib.share_lib.client
 
 import android.content.Context
-import com.lib.share.channel.ShareChannel
-import com.lib.share.call.ShareCallback
-import com.lib.share.channel.ChannelFactory
-import com.lib.share.data.ProgramType
-import com.lib.share.data.ShareEntityAdapter
-import com.lib.share.strategy.impl.StrategyOptions
+import com.lib.share_lib.call.ShareCallback
+import com.lib.share_lib.channel.ChannelStrategyFactory
+import com.lib.share_lib.channel.ShareChannel
+import com.lib.share_lib.data.ProgramType
+import com.lib.share_lib.data.ShareEntityAdapter
+import com.lib.share_lib.strategy.ShareContext
+import com.lib.share_lib.strategy.impl.StrategyOptions
 
 /**
  * @author yudenghao
@@ -16,8 +17,15 @@ class ShareClient(
     private var context: Context?,
     private var shareContext: HashMap<ShareChannel, StrategyOptions>,
     private var shareEntity: ShareEntityAdapter?,
-    private var wechatAppid: String,
-    private var programType: ProgramType = ProgramType.RELEASE) {
+    weChatAppId: String,
+    programType: ProgramType = ProgramType.RELEASE
+) {
+
+
+    init {
+        WE_CHAT_APP_ID = weChatAppId
+        PROGRAM_TYPE = programType
+    }
 
     /**
      * 执行策略
@@ -25,7 +33,7 @@ class ShareClient(
     fun share(channel: ShareChannel, shareCallback: ShareCallback.() -> Unit): ShareClient {
         if (shareContext.containsKey(channel) && shareContext[channel] != null) {
             val share = shareContext[channel]!!
-            share.getShareFactory().share(context,shareEntity, shareCallback)
+            share.getShareFactory().share(context, shareEntity, shareCallback)
         }
         return this
     }
@@ -36,12 +44,13 @@ class ShareClient(
 
 
     companion object {
-
+        var WE_CHAT_APP_ID: String = ""
+        var PROGRAM_TYPE: ProgramType = ProgramType.RELEASE
 
         class Builder(private var context: Context?) {
             private var shareContext = HashMap<ShareChannel, StrategyOptions>()
             private var shareEntity: ShareEntityAdapter? = null
-            private var wechatAppid: String = ""
+            private var weChatAppId: String = ""
             private var programType: ProgramType = ProgramType.RELEASE
 
 
@@ -50,20 +59,8 @@ class ShareClient(
                 return this
             }
 
-            /**
-             * 添加策略
-             */
-
-            fun addShareStrategy(channel: ShareChannel): Builder {
-                if (!this.shareContext.containsKey(channel) || this.shareContext[channel] != null) {
-                    this.shareContext[channel] = ChannelFactory.get(channel)
-                }
-                return this
-            }
-
-
-            fun addShareStrategy(shareContext: HashMap<ShareChannel, StrategyOptions>): Builder {
-                this.shareContext = shareContext
+            fun initWeChatConfig(appId: String): Builder {
+                this.weChatAppId = appId
                 return this
             }
 
@@ -72,15 +69,32 @@ class ShareClient(
                 return this
             }
 
-
-            fun build(): ShareClient {
-                return ShareClient(context, shareContext, shareEntity, wechatAppid, programType)
-            }
-
-            fun initWeChatConfig(appId: String): Builder {
-                this.wechatAppid = appId
+            /**
+             * 根据渠道添加现有策略
+             */
+            fun addShareStrategy(channel: ShareChannel): Builder {
+                if (!this.shareContext.containsKey(channel) || this.shareContext[channel] != null) {
+                    this.shareContext[channel] = ChannelStrategyFactory.get(channel)
+                }
                 return this
             }
+
+            /**
+             * 自定义策略
+             */
+            fun addShareStrategy(channel: ShareChannel,strategy: ShareContext) {
+                shareContext[channel] = strategy
+            }
+
+            fun addShareStrategy(shareContext: HashMap<ShareChannel, StrategyOptions>): Builder {
+                this.shareContext = shareContext
+                return this
+            }
+
+            fun build(): ShareClient {
+                return ShareClient(context, shareContext, shareEntity, weChatAppId, programType)
+            }
+
         }
     }
 }

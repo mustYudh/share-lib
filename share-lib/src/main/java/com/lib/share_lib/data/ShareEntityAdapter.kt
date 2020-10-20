@@ -1,6 +1,5 @@
-package com.lib.share.data
+package com.lib.share_lib.data
 
-import com.lib.share.channel.ShareChannel
 
 /**
  * @author yudenghao
@@ -11,4 +10,6 @@ interface ShareEntityAdapter {
     fun getShareDescription(): String?
     fun getShareThumb(): ByteArray?
     fun getShareUrl(): String?
+    //自定义扩展
+    fun extensionData(): Map<String,Any> = HashMap()
 }

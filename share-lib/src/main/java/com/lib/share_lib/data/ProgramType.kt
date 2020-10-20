@@ -1,4 +1,4 @@
-package com.lib.share.data
+package com.lib.share_lib.data
 
 /**
  * @author yudenghao

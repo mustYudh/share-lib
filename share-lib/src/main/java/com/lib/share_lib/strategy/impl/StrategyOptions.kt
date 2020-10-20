@@ -1,7 +1,8 @@
-package com.lib.share.strategy.impl
+package com.lib.share_lib.strategy.impl
 
-import com.lib.share.channel.ShareChannel
-import com.lib.share.ShareFactory
+import com.lib.share_lib.ShareFactory
+import com.lib.share_lib.channel.ShareChannel
+
 
 /**
  * @author yudenghao

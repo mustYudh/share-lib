@@ -2,10 +2,10 @@ package com.lib.share
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.lib.share.channel.ShareChannel
-import com.lib.share.client.ShareClient
-import com.lib.share.data.ProgramType
-import com.lib.share.data.ShareEntity
+import com.lib.share_lib.channel.ShareChannel
+import com.lib.share_lib.client.ShareClient
+import com.lib.share_lib.data.ProgramType
+import com.lib.share_lib.data.ShareEntity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,12 +14,14 @@ class MainActivity : AppCompatActivity() {
         val client: ShareClient = ShareClient.Companion.Builder(this)
             .setProgramType(ProgramType.RELEASE)
             .addShareStrategy(ShareChannel.WE_CHAT)
-            .addShareStrategy(ShareChannel.WE_CHAT_FRIEND)
-            .addShareStrategy(ShareChannel.WE_CHAT_CIRCLE)
-            .initWeChatConfig("")
+            .initWeChatConfig("12231124")
             .addShareData(ShareEntity())
             .build()
+
         client.share(ShareChannel.WE_CHAT) {
+            onStart {
+
+            }
             onSuccess {
 
             }

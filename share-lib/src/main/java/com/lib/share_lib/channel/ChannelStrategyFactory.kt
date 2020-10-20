@@ -1,13 +1,14 @@
-package com.lib.share.channel
+package com.lib.share_lib.channel
 
-import com.lib.share.strategy.impl.StrategyOptions
-import com.lib.share.strategy.wechat.WeChatStrategy
+import com.lib.share_lib.strategy.impl.StrategyOptions
+import com.lib.share_lib.strategy.wechat.WeChatStrategy
+
 
 /**
  * @author yudenghao
  * @date 2020/10/20
  */
- class ChannelFactory {
+ class ChannelStrategyFactory {
 
     companion object {
         fun get(channel: ShareChannel): StrategyOptions {

@@ -1,6 +1,5 @@
-package com.lib.share.data
+package com.lib.share_lib.data
 
-import com.lib.share.channel.ShareChannel
 
 /**
  * @author yudenghao
@@ -28,4 +27,5 @@ class ShareEntity : ShareEntityAdapter {
     override fun getShareUrl(): String? {
         return this.url
     }
+
 }

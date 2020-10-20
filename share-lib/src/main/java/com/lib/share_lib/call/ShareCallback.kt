@@ -1,4 +1,4 @@
-package com.lib.share.call
+package com.lib.share_lib.call
 
 import java.lang.Exception
 
@@ -8,11 +8,17 @@ import java.lang.Exception
  */
 class ShareCallback {
 
+     var mStart:(() -> Unit)? = null
+
     private var mSuccess: (() -> Unit)? = null
 
     private var mCancel: (() -> Unit)? = null
 
     private var mFailed: ((code: Int, errorMessage: String?, error: Exception) -> Unit)? = null
+
+    fun onStart(action: () -> Unit) {
+        this.mStart = action
+    }
 
     fun onSuccess(action: () -> Unit) {
         this.mSuccess = action

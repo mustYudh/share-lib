@@ -1,12 +1,12 @@
-package com.lib.share.strategy.wechat
+package com.lib.share_lib.strategy.wechat
 
 import android.content.Context
 import android.util.Log
-import com.lib.share.channel.ShareChannel
-import com.lib.share.ShareFactory
-import com.lib.share.call.ShareCallback
-import com.lib.share.data.ShareEntityAdapter
-import com.lib.share.strategy.ShareContext
+import com.lib.share_lib.call.ShareCallback
+import com.lib.share_lib.channel.ShareChannel
+import com.lib.share_lib.client.ShareClient
+import com.lib.share_lib.data.ShareEntityAdapter
+import com.lib.share_lib.strategy.ShareContext
 
 /**
  * @author yudenghao
@@ -14,10 +14,8 @@ import com.lib.share.strategy.ShareContext
  */
 class WeChatStrategy(channel: ShareChannel) : ShareContext(channel) {
 
-    
-
     override fun share(context: Context?, shareEntity: ShareEntityAdapter?, shareCallback: ShareCallback.() -> Unit) {
-
+        register(shareCallback)
     }
 
 }
