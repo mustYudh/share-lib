@@ -10,7 +10,5 @@ import com.lib.share_lib.channel.ShareChannel
  */
 interface StrategyOptions {
 
-    fun shareTypeOptions(type: ShareChannel): Boolean
-
     fun getShareFactory() : ShareFactory
 }

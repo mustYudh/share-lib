@@ -18,12 +18,14 @@ class ShareClient(
     private var shareContext: HashMap<ShareChannel, StrategyOptions>,
     private var shareEntity: ShareEntityAdapter?,
     weChatAppId: String,
+    weChatAppKey: String,
     programType: ProgramType = ProgramType.RELEASE
 ) {
 
 
     init {
         WE_CHAT_APP_ID = weChatAppId
+        WE_CHAT_APP_KEY = weChatAppKey
         PROGRAM_TYPE = programType
     }
 
@@ -45,12 +47,14 @@ class ShareClient(
 
     companion object {
         var WE_CHAT_APP_ID: String = ""
+        var WE_CHAT_APP_KEY: String = ""
         var PROGRAM_TYPE: ProgramType = ProgramType.RELEASE
 
         class Builder(private var context: Context?) {
             private var shareContext = HashMap<ShareChannel, StrategyOptions>()
             private var shareEntity: ShareEntityAdapter? = null
             private var weChatAppId: String = ""
+            private var weChatAppKey: String = ""
             private var programType: ProgramType = ProgramType.RELEASE
 
 
@@ -59,8 +63,9 @@ class ShareClient(
                 return this
             }
 
-            fun initWeChatConfig(appId: String): Builder {
+            fun initWeChatConfig(appId: String, appKey: String): Builder {
                 this.weChatAppId = appId
+                this.weChatAppKey = appKey
                 return this
             }
 
@@ -82,7 +87,7 @@ class ShareClient(
             /**
              * 自定义策略
              */
-            fun addShareStrategy(channel: ShareChannel,strategy: ShareContext) {
+            fun addShareStrategy(channel: ShareChannel, strategy: ShareContext) {
                 shareContext[channel] = strategy
             }
 
@@ -92,7 +97,7 @@ class ShareClient(
             }
 
             fun build(): ShareClient {
-                return ShareClient(context, shareContext, shareEntity, weChatAppId, programType)
+                return ShareClient(context, shareContext, shareEntity, weChatAppId,weChatAppKey, programType)
             }
 
         }

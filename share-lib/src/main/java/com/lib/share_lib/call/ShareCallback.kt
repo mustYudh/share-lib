@@ -10,11 +10,11 @@ class ShareCallback {
 
      var mStart:(() -> Unit)? = null
 
-    private var mSuccess: (() -> Unit)? = null
+     var mSuccess: (() -> Unit)? = null
 
-    private var mCancel: (() -> Unit)? = null
+     var mCancel: (() -> Unit)? = null
 
-    private var mFailed: ((code: Int, errorMessage: String?, error: Exception) -> Unit)? = null
+     var mFailed: ((code: Int, errorMessage: String?) -> Unit)? = null
 
     fun onStart(action: () -> Unit) {
         this.mStart = action
@@ -28,7 +28,7 @@ class ShareCallback {
         this.mCancel = action
     }
 
-    fun onFailed(action: (code: Int, errorMessage: String?, error: Exception) -> Unit) {
+    fun onFailed(action: (code: Int, errorMessage: String?) -> Unit) {
         this.mFailed = action
     }
 }

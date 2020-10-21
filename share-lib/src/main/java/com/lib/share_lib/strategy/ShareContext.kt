@@ -2,6 +2,7 @@ package com.lib.share_lib.strategy
 
 import com.lib.share_lib.ShareFactory
 import com.lib.share_lib.call.ShareCallback
+import com.lib.share_lib.call.ShareResult
 import com.lib.share_lib.channel.ShareChannel
 import com.lib.share_lib.strategy.impl.StrategyOptions
 
@@ -11,23 +12,29 @@ import com.lib.share_lib.strategy.impl.StrategyOptions
  * @date 2020/10/20
  */
 
- abstract class ShareContext(channel: ShareChannel): StrategyOptions, ShareFactory {
+abstract class ShareContext : StrategyOptions, ShareFactory {
 
     lateinit var mListener: ShareCallback
 
     fun register(shareCallback: ShareCallback.() -> Unit) {
-//        mListener = ShareCallback().also(shareCallback)
+        mListener = ShareCallback().also(shareCallback)
     }
 
-    fun setResult() {
-        if (::mListener.isInitialized)
+    fun setResult(result: ShareResult) {
+        if (::mListener.isInitialized) {
+            when (result.resultState()) {
+                ShareResult.ResultState.START -> mListener.mStart?.invoke()
+                ShareResult.ResultState.CANCEL -> mListener.mCancel?.invoke()
+                ShareResult.ResultState.SUCCESS -> mListener.mSuccess?.invoke()
+                ShareResult.ResultState.FAIL -> mListener.mFailed?.invoke(
+                    result.resultCode(),
+                    result.resultMessage()
+                )
+            }
+        }
     }
 
-    private var mType: ShareChannel = channel
 
-    override fun shareTypeOptions(type: ShareChannel): Boolean {
-        return type == mType
-    }
 
     override fun getShareFactory(): ShareFactory {
         return this

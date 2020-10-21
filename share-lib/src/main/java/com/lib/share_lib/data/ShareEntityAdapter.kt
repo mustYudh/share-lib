@@ -11,5 +11,5 @@ interface ShareEntityAdapter {
     fun getShareThumb(): ByteArray?
     fun getShareUrl(): String?
     //自定义扩展
-    fun extensionData(): Map<String,Any> = HashMap()
+    fun extensionData(): Map<Any,Any> = HashMap()
 }

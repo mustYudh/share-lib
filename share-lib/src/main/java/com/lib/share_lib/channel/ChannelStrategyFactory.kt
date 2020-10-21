@@ -13,7 +13,7 @@ import com.lib.share_lib.strategy.wechat.WeChatStrategy
     companion object {
         fun get(channel: ShareChannel): StrategyOptions {
            return when(channel) {
-                ShareChannel.WE_CHAT -> WeChatStrategy(channel)
+                ShareChannel.WE_CHAT -> WeChatStrategy.INSTANCE
            }
         }
     }
