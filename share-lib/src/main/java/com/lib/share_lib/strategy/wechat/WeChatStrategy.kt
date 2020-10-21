@@ -44,8 +44,7 @@ class WeChatStrategy : ShareContext() {
         }
         val extension: Map<Any, Any>? = shareEntity?.extensionData()
         if (extension != null && extension.containsKey(SHARE_TYPE) && extension[SHARE_TYPE] != null) {
-            ShareFactor.getShareStrategy(extension[SHARE_TYPE] as ShareType)
-                .doAction(wxApi, shareEntity)
+            ShareFactor.getShareStrategy(extension[SHARE_TYPE] as ShareType).doAction(wxApi, shareEntity)
         }
     }
 

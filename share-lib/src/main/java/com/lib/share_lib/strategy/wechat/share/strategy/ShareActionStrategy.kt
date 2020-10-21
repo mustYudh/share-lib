@@ -8,5 +8,6 @@ import com.lib.share_lib.data.ShareEntityAdapter
  */
 interface ShareActionStrategy<T> {
 
+
     fun  doAction(wxApi: T?, shareEntity: ShareEntityAdapter?, vararg args: Any?)
 }

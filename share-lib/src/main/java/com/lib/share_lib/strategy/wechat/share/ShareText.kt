@@ -1,6 +1,7 @@
 package com.lib.share_lib.strategy.wechat.share
 
 import com.lib.share_lib.data.ShareEntityAdapter
+import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionContext
 import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionStrategy
 import com.tencent.mm.opensdk.openapi.IWXAPI
 
@@ -9,7 +10,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
  * @date 2020/10/21
  */
 
-class ShareText : ShareActionStrategy<IWXAPI> {
+class ShareText : ShareActionContext() {
 
     override fun doAction(wxApi: IWXAPI?, shareEntity: ShareEntityAdapter?,vararg args: Any?) {
 
