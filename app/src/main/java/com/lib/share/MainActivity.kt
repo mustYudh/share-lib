@@ -24,13 +24,13 @@ class MainActivity : AppCompatActivity() {
                 Log.e("========>", "开始")
             }
             onSuccess {
-
+                Log.e("========>", "成功")
             }
             onCancel {
-
+                Log.e("========>", "取消")
             }
             onFailed { code, errorMessage ->
-
+                Log.e("========>", "失败")
             }
         }
 

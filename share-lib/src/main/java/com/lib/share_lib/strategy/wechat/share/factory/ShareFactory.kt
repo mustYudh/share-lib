@@ -2,8 +2,7 @@ package com.lib.share_lib.strategy.wechat.share.factory
 
 import com.lib.share_lib.data.ShareType
 import com.lib.share_lib.strategy.wechat.share.*
-import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionStrategy
-import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionContext
 
 /**
  * @author yudenghao
@@ -11,13 +10,13 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
  */
 class ShareFactor {
     companion object {
-        fun getShareStrategy(type: ShareType): ShareActionStrategy<IWXAPI> {
+        fun getShareStrategy(type: ShareType): ShareActionContext {
             return when (type) {
                 ShareType.TEXT -> ShareText()
                 ShareType.IMAGE -> ShareImage()
                 ShareType.MUSIC -> ShareMusic()
                 ShareType.VIDEO -> ShareVideo()
-                ShareType.URL ->   ShareUrl()
+                ShareType.URL ->   ShareWebPage()
                 ShareType.MINI_PROGRAM -> ShareMiniProgram()
                 ShareType.FILE_PROVIDER -> ShareFileProvider()
             }

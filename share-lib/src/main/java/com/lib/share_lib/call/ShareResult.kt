@@ -14,10 +14,14 @@ package com.lib.share_lib.call
     fun resultMessage(): String?
 
 
-    enum class ResultState(val state: Int) {
+    enum class ResultState(private val code: Int) {
         START(0),
         SUCCESS(1),
         CANCEL(2),
-        FAIL(3)
+        FAIL(3);
+
+        fun getCode(): Int {
+            return code
+        }
     }
 }

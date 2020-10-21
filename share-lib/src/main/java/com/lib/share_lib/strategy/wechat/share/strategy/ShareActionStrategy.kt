@@ -1,5 +1,6 @@
 package com.lib.share_lib.strategy.wechat.share.strategy
 
+import android.content.Context
 import com.lib.share_lib.data.ShareEntityAdapter
 
 /**
@@ -9,5 +10,5 @@ import com.lib.share_lib.data.ShareEntityAdapter
 interface ShareActionStrategy<T> {
 
 
-    fun  doAction(wxApi: T?, shareEntity: ShareEntityAdapter?, vararg args: Any?)
+    fun  doAction(context: Context?, wxApi: T?, shareEntity: ShareEntityAdapter?, vararg args: Any?)
 }

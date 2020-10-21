@@ -1,5 +1,7 @@
 package com.lib.share_lib.data
 
+import com.lib.share_lib.strategy.wechat.WeChatStrategy
+
 
 /**
  * @author yudenghao
@@ -28,4 +30,9 @@ class ShareEntity : ShareEntityAdapter {
         return this.url
     }
 
+    override fun extensionData(): Map<Any, Any> {
+        val map: HashMap<Any,Any> = HashMap()
+        map[ConstKey.SHARE_TYPE] = ShareType.TEXT
+        return map
+    }
 }

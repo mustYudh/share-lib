@@ -1,5 +1,6 @@
 package com.lib.share_lib.strategy.wechat.share
 
+import android.content.Context
 import com.lib.share_lib.data.ShareEntityAdapter
 import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionContext
 import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionStrategy
@@ -11,7 +12,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
  */
 class ShareFileProvider: ShareActionContext() {
 
-    override fun doAction(wxApi: IWXAPI?, shareEntity: ShareEntityAdapter?, vararg args: Any?) {
+    override fun doAction(context: Context?, wxApi: IWXAPI?, shareEntity: ShareEntityAdapter?, vararg args: Any?) {
         
     }
 }

@@ -7,7 +7,7 @@ import com.lib.share_lib.data.ShareEntityAdapter
 import com.lib.share_lib.strategy.wechat.share.strategy.ShareActionContext
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
-import com.tencent.mm.opensdk.modelmsg.WXVideoObject
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
 import com.tencent.mm.opensdk.openapi.IWXAPI
 
 
@@ -15,12 +15,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
  * @author yudenghao
  * @date 2020/10/21
  */
-class ShareVideo : ShareActionContext() {
+class ShareWebPage : ShareActionContext() {
 
     override fun doAction(context: Context?, wxApi: IWXAPI?, shareEntity: ShareEntityAdapter?, vararg args: Any?) {
-        val video = WXVideoObject()
-        video.videoUrl = shareEntity?.getShareUrl()
-        val msg = WXMediaMessage(video)
+        val webPage = WXWebpageObject()
+        webPage.webpageUrl = shareEntity?.getShareUrl()
+        val msg = WXMediaMessage(webPage)
         msg.title = shareEntity?.getShareTitle()
         msg.description = shareEntity?.getShareDescription()
         msg.thumbData = shareEntity?.getShareThumb()
@@ -28,11 +28,12 @@ class ShareVideo : ShareActionContext() {
         val scene = getExtensionData(ConstKey.WE_CHAT_CHANNEL, shareEntity?.extensionData()) as Int
         val userOpenId =
             getExtensionData(ConstKey.WE_CHAT_USER_OPEN_ID, shareEntity?.extensionData()) as String
-        req.transaction = "${System.currentTimeMillis()}_${ShareChannel.WE_CHAT}_video"
+        req.transaction = "${System.currentTimeMillis()}_${ShareChannel.WE_CHAT}_webPage"
         req.message = msg
         req.scene = scene
         req.userOpenId = userOpenId
         wxApi?.sendReq(req);
-    }
 
+
+    }
 }
