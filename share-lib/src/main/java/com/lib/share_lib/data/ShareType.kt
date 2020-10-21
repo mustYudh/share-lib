@@ -9,7 +9,7 @@ enum class ShareType {
     IMAGE,
     MUSIC,
     VIDEO,
-    URL,
+    WEB_PAGE,
     MINI_PROGRAM,
     FILE_PROVIDER
 }

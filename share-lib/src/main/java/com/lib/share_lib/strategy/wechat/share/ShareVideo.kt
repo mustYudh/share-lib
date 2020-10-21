@@ -27,11 +27,11 @@ class ShareVideo : ShareActionContext() {
         val req = SendMessageToWX.Req()
         val scene = getExtensionData(ConstKey.WE_CHAT_CHANNEL, shareEntity?.extensionData()) as Int
         val userOpenId =
-            getExtensionData(ConstKey.WE_CHAT_USER_OPEN_ID, shareEntity?.extensionData()) as String
+            getExtensionData(ConstKey.WE_CHAT_USER_OPEN_ID, shareEntity?.extensionData())
         req.transaction = "${System.currentTimeMillis()}_${ShareChannel.WE_CHAT}_video"
         req.message = msg
         req.scene = scene
-        req.userOpenId = userOpenId
+        req.userOpenId = if (userOpenId != null) userOpenId as String else ""
         wxApi?.sendReq(req);
     }
 

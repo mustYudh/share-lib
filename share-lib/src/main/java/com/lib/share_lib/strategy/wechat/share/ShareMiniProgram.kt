@@ -32,7 +32,7 @@ class ShareMiniProgram : ShareActionContext() {
         msg.thumbData = shareEntity?.getShareThumb()
         val req = SendMessageToWX.Req()
         req.transaction = "${System.currentTimeMillis()}_${ShareChannel.WE_CHAT}_miniProgram"
-        req.message = msg;
+        req.message = msg
         req.scene = SendMessageToWX.Req.WXSceneSession;  // 目前只支持会话
         wxApi?.sendReq(req);
     }

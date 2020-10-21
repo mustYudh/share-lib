@@ -16,7 +16,7 @@ class ShareFactor {
                 ShareType.IMAGE -> ShareImage()
                 ShareType.MUSIC -> ShareMusic()
                 ShareType.VIDEO -> ShareVideo()
-                ShareType.URL ->   ShareWebPage()
+                ShareType.WEB_PAGE ->   ShareWebPage()
                 ShareType.MINI_PROGRAM -> ShareMiniProgram()
                 ShareType.FILE_PROVIDER -> ShareFileProvider()
             }

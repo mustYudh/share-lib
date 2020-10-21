@@ -29,12 +29,12 @@ class ShareImage : ShareActionContext() {
         msg.thumbData = shareEntity?.getShareThumb()
         val scene = getExtensionData(ConstKey.WE_CHAT_CHANNEL, shareEntity?.extensionData()) as Int
         val userOpenId =
-            getExtensionData(ConstKey.WE_CHAT_USER_OPEN_ID, shareEntity?.extensionData()) as String
+            getExtensionData(ConstKey.WE_CHAT_USER_OPEN_ID, shareEntity?.extensionData())
         val req = SendMessageToWX.Req()
         req.transaction = "${System.currentTimeMillis()}_${ShareChannel.WE_CHAT}_img"
         req.message = msg
         req.scene = scene
-        req.userOpenId = userOpenId
+        req.userOpenId = if (userOpenId != null) userOpenId as String else ""
         wxApi?.sendReq(req)
     }
 

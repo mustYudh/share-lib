@@ -1,6 +1,7 @@
 package com.lib.share_lib.strategy.wechat.share
 
 import android.content.Context
+import android.util.Log
 import com.lib.share_lib.channel.ShareChannel
 import com.lib.share_lib.data.ConstKey
 import com.lib.share_lib.data.ShareEntityAdapter
